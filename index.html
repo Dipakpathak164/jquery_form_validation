@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery form validation</title>
+    <!-- bootstrap cdn -->
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<!-- --custom style sheet-- -->
+<link rel="stylesheet" href="./css/style.css">
+<style>
+    .hash-error{
+               
+               border-color: red ;
+           }
+           .text-danger{
+                color: #f31717;
+                font-size: 1rem;
+           }
+</style>
+</head>
+<body>
+    <div class="container  py-3">
+        <div class="row">
+         <div class="col-lg-6 col-md-6 col-12 mx-auto">
+         <div class="header text-center">
+            <h4 class="text-uppercase">Registration form</h4>
+         </div>
+         <form action="" class="form  py-3" id="form" method="post">
+             <div class="form-group">
+                  <label for="" class="label__style">User name</label>
+                  <input type="text" class="form-control" name="username" id="username" placeholder="username">
+                  <span id="error_username" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                  <label for="" class="label__style">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email ID">
+                  <span id="error_email" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                  <label for="" class="label__style">phone</label>
+                  <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter your phone number">
+                  <span id="error_phone" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                  <label for="" class="label__style">Password</label>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="password">
+                  <span id="error_password" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                  <label for="" class="label__style">Confirm password</label>
+                  <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="confirm password">
+                  <span id="error_cpassword" class="text-danger"></span>
+             </div>
+              <div class="form-group">
+               <button class="btn btn-primary py-2" type="button" id="submit__btn">
+                    <h4 class="text-uppercase mb-0">submit</h4>
+               </button>
+              </div>
+         </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- jQuery library -->
+<script src="./js/jquery-3.5.1.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="./js/bootstrap.min.js"></script>
+<script>
+     $(document).ready(function(){
+        $('#submit__btn').click(function(){
+           var user_name_val = $('#username').val();
+           var  email_val = $('#email').val();
+           var phone_val = $('#phone').val();
+           var password_val = $('#password').val();
+           var cpassword_val = $('#cpassword').val();
+           var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+           if(!emailReg.test(email_val)){
+               error_email = 'Enter a valid email';
+              
+               $('#error_email').html(error_email);
+               $('#email').addClass('hash-error');
+           }else{
+                if($.trim(email_val) == 0){
+                    error_email ='Email is required';
+                     
+                    $('#error_email').html(error_email);
+                    $('#email').addClass('hash-error');
+                }else{
+                    error_email ='';
+                     
+                     $('#error_email').html(error_email);
+                     $('#email').removeClass('hash-error');
+                }
+
+          }
+           if($.trim(user_name_val) == 0){
+               error_username ='Username is required';
+               $('#error_username').html(error_username);
+               $('#username').addClass('hash-error');
+           }else{
+               error_username = '';
+               $('#error_username').html(error_username);
+               $('#username').removeClass('hash-error');
+           }
+
+           if($.trim(phone_val) == 0){
+                error_phone = 'Mobile no is required';
+                $('#error_phone').html(error_phone);
+                $('#phone').addClass('hash-error');
+           }else{
+                if($.trim(phone_val).length < 10) {
+                    error_phone = 'At least 10 digit';
+                    $('#error_phone').html(error_phone);
+                    $('#phone').addClass('hash-error');
+                }else{
+                    error_phone = '';
+                    $('#error_phone').html(error_phone);
+                    $('#phone').removeClass('hash-error');
+                }
+           }
+
+           if($.trim(password_val) == 0){
+               error_password ='Password is required';
+               $('#error_password').html(error_password);
+               $('#password').addClass('hash-error');
+           }else{
+                if($.trim(cpassword_val) == 0){
+                    error_cpassword = "Please enter your confirm password";
+                    $('#error_cpassword').html(error_cpassword);
+                    $('#cpassword').addClass('hash-error');
+                  }else{
+                     if($.trim(password_val) != $.trim(cpassword_val)){
+                    error_cpassword = "Password is not matching";
+                    $('#error_cpassword').html(error_cpassword);
+                    $('#cpassword').addClass('hash-error');
+                  }else{
+                   error_cpassword = "";
+                    $('#error_cpassword').html(error_cpassword);
+                    $('#cpassword').removeClass('hash-error');
+                 }
+                }
+                    error_password = "";
+                    $('#error_password').html(error_password);
+                    $('#password').removeClass('hash-error');
+
+           }
+         
+           
+        });
+     });
+</script>
+</body>
+</html>
